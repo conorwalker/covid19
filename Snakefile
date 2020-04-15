@@ -51,8 +51,8 @@ rule call_variants:
         lambda wildcards: ancient(expand("bam_alignments/{sample}/{sample}.bam", sample=wildcards.sample)),
         lambda wildcards: ancient(expand("bam_alignments/{sample}/{sample}.strict.bam", sample=wildcards.sample)),
     output:
-        protected("variant_calls/standard/{sample}.vcf"),
-        protected("variant_calls/strict/{sample}.strict.vcf")
+        protected("variant_calls/standard/{sample}.vcf.gz"),
+        protected("variant_calls/strict/{sample}.strict.vcf.gz")
     log:
         "logs/call_variants/{sample}.log"
     shell:
