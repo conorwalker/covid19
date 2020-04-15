@@ -41,18 +41,13 @@ def main():
             # if line started with a comment
             if not line:
                 continue
-            try:
-                line = line.split()
-                seq_position = int(line[1])
-                ref_allele = line[3]
-                alt_allele = line[4]
-                info_field = line[7]
-                info_dic = {}
-                split_info = info_field.split(";")
-            except IndexError:
-                print("49 index error")
-                print("sample", sample)
-                print("line", line)
+            line = line.split()
+            seq_position = int(line[1])
+            ref_allele = line[3]
+            alt_allele = line[4]
+            info_field = line[7]
+            info_dic = {}
+            split_info = info_field.split(";")
             # do not process line if the INDEL flag is present,
             # the surrounding non-indel rows should give base counts for this
             # region
@@ -66,13 +61,7 @@ def main():
             allelic_depths = line[-1].split(":")[-1].split(",")
             counts = {"A":0, "C":0, "G":0, "T":0}
             # count ref allele
-            try:
-                counts[ref_allele] += int(allelic_depths[0])
-            except ValueError:
-                print("line:", line)
-                print("sample", sample)
-                print("ref_allele:", ref_allele)
-                print("allelic_depths:", allelic_depths)
+            counts[ref_allele] += int(allelic_depths[0])
             total_alt_alleles = 0
             split_alt_alleles = alt_allele.split(",")
 
