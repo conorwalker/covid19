@@ -1,0 +1,20 @@
+name: covid_env
+channels:
+  - bioconda
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.7
+  - entrez-direct
+  - picard
+  - bwa
+  - samtools
+  - sra-tools
+  - fastp
+  - openssl=1.0
+  - bcftools
+  - varscan
+  - bowtie2
+  - snakemake-minimal
+prefix: /nfs/research1/goldman/conor/tools/conda_home/envs/covid_env
+
