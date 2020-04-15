@@ -13,7 +13,7 @@ Standard filtering:
 
 Strict filtering:
 - Base quality >=35 at >=90% of the read
-- Base quality >=35 at 3' end (mean quality in window, default window size in fastp is 4)
+- Base quality >=30 at 3' end (mean quality in window, default window size in fastp is 4)
 - 15 bases are trimmed from the start and end of each read
 - Read length >= 50 (after trimming)
 - Soft or hard clipped reads removed from the alignment
