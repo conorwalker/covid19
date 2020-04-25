@@ -7,11 +7,8 @@ if [ ! -d sra_tmpdir ]; then
 fi
 
 
-# retrieve accession IDs from illumina runs
-mv current_illumina.txt backup_accessions/
-mv current_metadata.txt backup_accessions/
-wget https://raw.githubusercontent.com/galaxyproject/SARS-CoV-2/master/genomics/4-Variation/current_illumina.txt
-wget https://raw.githubusercontent.com/galaxyproject/SARS-CoV-2/master/genomics/4-Variation/current_metadata.txt
+# fetch all sequencing run data and metadata, split into ONT and illumina runs
+sh scripts/fetch_data.sh
 
 
 # fetch reference genome and index if it doesn't exist locally
@@ -25,6 +22,7 @@ if [ ! -f "$ref_genome_path" ]; then
     echo
 fi
 
+
 # check if all fastq files up-to-date
 while read sample; do
     outdir=fastq_files/"$sample"
@@ -33,13 +31,16 @@ while read sample; do
     fi
 done < current_illumina.txt
 
+
 # run snakemake pipeline
 #snakemake all --nocolor --cores 2
-snakemake all --latency-wait 120 --jobs 500 --cluster 'bsub -e /dev/null -o /dev/null -M 10000 -R "rusage[mem=10000]" -n 2' -k --nocolor
+snakemake all --latency-wait 300 --jobs 500 --cluster 'bsub -e /dev/null -o /dev/null -M 20000 -R "rusage[mem=20000]" -n 2' -k --nocolor
+
 
 # clean up
 rm fastp.html
 rm fastp.json
+
 
 # produce count files for PoMo
 if [ ! -d count_files ]; then
