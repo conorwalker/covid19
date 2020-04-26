@@ -1,8 +1,9 @@
 sample=$1;
+technology=$2;
 
-outdir=fastq_files/"$sample"
+outdir=fastq_files/"$technology"/"$sample"
 
-lsout=$(ls -A fastq_files/"$sample")
+lsout=$(ls -A fastq_files/"$technology"/"$sample")
 
 if [ -z "$lsout" ]; then
     mkdir -p "$outdir"
