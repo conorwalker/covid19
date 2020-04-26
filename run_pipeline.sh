@@ -13,12 +13,15 @@ sh scripts/fetch_data.sh
 
 # fetch reference genome and index if it doesn't exist locally
 ref_genome_path=ref_genome/SARS-CoV-2.fa
+minimap_index_path=ref_genome/SARS-CoV-2.mmi
+
 if [ ! -f "$ref_genome_path" ]; then
     mkdir ref_genome
     efetch -db nucleotide -id MN908947.3 -format fasta > "$ref_genome_path"
     # index the genome for downstream analysis
     bwa index "$ref_genome_path"
     samtools faidx "$ref_genome_path"
+    minimap2 -x map-ont -d "$minimap_index_path" "$ref_genome_path";
     echo
 fi
 
