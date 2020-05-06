@@ -1,8 +1,6 @@
 To run the pipeline:
 sh run_pipeline.sh
 
-This will retrieve the latest "current_illumina.txt" and "current_metadata.txt" files from https://raw.githubusercontent.com/galaxyproject/SARS-CoV-2/master/genomics/4-Variation/
-
 Two sets of QC'd FASTQ, bam, vcf and cf files are produced, according to two sets of filtering criteria:
 
 Standard filtering:
